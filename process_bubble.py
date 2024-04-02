@@ -1,3 +1,6 @@
+import cv2
+import numpy as np
+
 def process_bubble(image):
     """
     Processes the speech bubble in the given image, making its contents white.
