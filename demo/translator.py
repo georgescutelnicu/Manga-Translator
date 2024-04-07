@@ -29,12 +29,12 @@ class MangaTranslator:
     def _translate_with_google(self, text):
         translator = GoogleTranslator(source=self.source, target=self.target)
         translated_text = translator.translate(text)
-        return translated_text
+        return translated_text if translated_text != None else text
 
     def _translate_with_hf(self, text):
         pipe = pipeline("translation", model=f"Helsinki-NLP/opus-mt-ja-en")
         translated_text = pipe(text)[0]["translation_text"]
-        return translated_text
+        return translated_text if translated_text != None else text
 
     def _preprocess_text(self, text):
         preprocessed_text = text.replace("．", ".")
