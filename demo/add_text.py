@@ -22,19 +22,30 @@ def add_text(image, text, font_path, bubble_contour):
 
     x, y, w, h = cv2.boundingRect(bubble_contour)
 
-    wrapped_text = textwrap.fill(text, width=int(w * 0.1), break_long_words=True)
+    line_height = 16
+    font_size = 14
+    wrapping_ratio = 0.075
 
-    line_height = 12
-    font_size = 10
+    wrapped_text = textwrap.fill(text, width=int(w * wrapping_ratio), 
+                                 break_long_words=True)
+    
     font = ImageFont.truetype(font_path, size=font_size)
 
     lines = wrapped_text.split('\n')
     total_text_height = (len(lines)) * line_height
 
-    if total_text_height > h:
-        font_size *= (h / total_text_height)
-        line_height = 10
-        total_text_height = (len(lines)) * line_height
+    while total_text_height > h:
+        line_height -= 2
+        font_size -= 2
+        wrapping_ratio += 0.025
+
+        wrapped_text = textwrap.fill(text, width=int(w * wrapping_ratio), 
+                                 break_long_words=True)
+                                 
+        font = ImageFont.truetype(font_path, size=font_size)
+
+        lines = wrapped_text.split('\n')
+        total_text_height = (len(lines)) * line_height                         
 
     # Vertical centering
     text_y = y + (h - total_text_height) // 2
