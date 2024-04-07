@@ -1,5 +1,6 @@
 from ultralytics import YOLO
 
+
 def detect_bubbles(model_path, image_path):
     """
     Detects bubbles in an image using a YOLOv8 model.

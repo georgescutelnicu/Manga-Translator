@@ -1,6 +1,7 @@
 from deep_translator import GoogleTranslator
 from transformers import pipeline
 
+
 class MangaTranslator:
     def __init__(self):
         self.target = "en"
@@ -21,9 +22,9 @@ class MangaTranslator:
         if method == "hf":
             return self._translate_with_hf(self._preprocess_text(text))
         elif method == "google":
-          return self._translate_with_google(self._preprocess_text(text))
+            return self._translate_with_google(self._preprocess_text(text))
         else:
-          raise ValueError("Invalid translation method.")
+            raise ValueError("Invalid translation method.")
             
     def _translate_with_google(self, text):
         translator = GoogleTranslator(source=self.source, target=self.target)
@@ -34,7 +35,7 @@ class MangaTranslator:
         pipe = pipeline("translation", model=f"Helsinki-NLP/opus-mt-ja-en")
         translated_text = pipe(text)[0]["translation_text"]
         return translated_text
-    
+
     def _preprocess_text(self, text):
         preprocessed_text = text.replace("．", ".")
         return preprocessed_text

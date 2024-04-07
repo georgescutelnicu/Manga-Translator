@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 def process_bubble(image):
     """
     Processes the speech bubble in the given image, making its contents white.
@@ -19,7 +20,7 @@ def process_bubble(image):
     largest_contour = max(contours, key=cv2.contourArea)
 
     mask = np.zeros_like(gray)
-    cv2.drawContours(mask, [largest_contour], -1, (255), cv2.FILLED)
+    cv2.drawContours(mask, [largest_contour], -1, 255, cv2.FILLED)
 
     image[mask == 255] = (255, 255, 255)
 

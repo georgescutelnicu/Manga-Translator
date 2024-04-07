@@ -1,14 +1,17 @@
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 import textwrap
+import cv2
 
-def add_text(image, text, bubble_contour):
+
+def add_text(image, text, font_path, bubble_contour):
     """
     Add text inside a speech bubble contour.
 
     Args:
         image (numpy.ndarray): Processed bubble image (cv2 format - BGR).
         text (str): Text to be placed inside the speech bubble.
+        font_path (str): Font path.
         bubble_contour (numpy.ndarray): Contour of the detected speech bubble.
 
     Returns:
@@ -18,13 +21,12 @@ def add_text(image, text, bubble_contour):
     draw = ImageDraw.Draw(pil_image)
 
     x, y, w, h = cv2.boundingRect(bubble_contour)
-    max_h = int(h * 0.75)
 
     wrapped_text = textwrap.fill(text, width=int(w * 0.1), break_long_words=True)
 
     line_height = 12
     font_size = 10
-    font = ImageFont.truetype("/fonts/animeace_i.ttf", size=font_size)
+    font = ImageFont.truetype(font_path, size=font_size)
 
     lines = wrapped_text.split('\n')
     total_text_height = (len(lines)) * line_height
