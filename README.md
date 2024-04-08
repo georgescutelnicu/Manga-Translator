@@ -25,7 +25,7 @@ Python tool for translating text found within speech bubbles in manga images. It
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/your_username/manga-translator.git
+    git clone https://github.com/georgescutelnicu/Manga-Translator.git
     ```
 
 2. Install the required dependencies:
@@ -39,13 +39,13 @@ Python tool for translating text found within speech bubbles in manga images. It
 1. Navigate to the directory where you cloned the repository:
 
     ```bash
-    cd manga-translator
+    cd Manga-Translator
     ```
 
 2. Run the `manga_translator.py` script with the required arguments:
 
     ```bash
-    python manga_translator.py --model-path /path/to/model --image-path /path/to/image --font-path /path/to/font --translator [google/hf] --save-path /path/to/save
+    python main.py --model-path /path/to/model --image-path /path/to/image --font-path /path/to/font --translator [google/hf] --save-path /path/to/save
     ```
 
     Replace the arguments as follows:
@@ -63,7 +63,7 @@ Python tool for translating text found within speech bubbles in manga images. It
 
 ## Examples
 
-## 1
+## 1.
 
 | Original Image | Bubbles Detection |
 |:-----------------:|:-----------------:|
@@ -73,7 +73,7 @@ Python tool for translating text found within speech bubbles in manga images. It
 |:-----------------:|:-----------------:|
 | ![Image 3](examples/2.png) | ![Image 4](examples/3.png) |
 
-## 2
+## 2.
 
 | Original Image | Bubbles Detection |
 |:-----------------:|:-----------------:|
@@ -82,6 +82,14 @@ Python tool for translating text found within speech bubbles in manga images. It
 | Clear Bubbles | Add translation |
 |:-----------------:|:-----------------:|
 | ![Image 3](examples/ex2.png) | ![Image 4](examples/ex3.png) |
+
+## Caveats
+
+- **Translation Quality**: Please note that the translation quality may vary, as we utilize free translation services.
+- **Potential Solution**: Training a translation model or using a paid translation service for improved translation quality.
+  <br> <br>
+- **Limited Dataset**: The model's performance may be affected by the size and quality of the dataset used for training.
+- **Potential Solution**: Creating a custom dataset.
 
 ## License
 
