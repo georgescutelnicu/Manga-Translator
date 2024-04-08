@@ -42,7 +42,7 @@ Python tool for translating text found within speech bubbles in manga images. It
     cd Manga-Translator
     ```
 
-2. Run the `manga_translator.py` script with the required arguments:
+2. Run the `main.py` script with the required arguments:
 
     ```bash
     python main.py --model-path /path/to/model --image-path /path/to/image --font-path /path/to/font --translator [google/hf] --save-path /path/to/save
