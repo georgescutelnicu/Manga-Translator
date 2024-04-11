@@ -22,7 +22,7 @@ def predict(img, translation_method, font):
         translation_method = "google"
     if font == None:
         font = "fonts/animeace_i.ttf"
-    
+
     results = detect_bubbles(MODEL, img)
 
     manga_translator = MangaTranslator()
@@ -39,8 +39,8 @@ def predict(img, translation_method, font):
         text = mocr(im)
 
         detected_image, cont = process_bubble(detected_image)
-        
-        text_translated = manga_translator.translate(text, 
+
+        text_translated = manga_translator.translate(text,
                                                      method=translation_method)
 
         image_with_text = add_text(detected_image, text_translated, font, cont)
@@ -49,9 +49,11 @@ def predict(img, translation_method, font):
 
 demo = gr.Interface(fn=predict,
                     inputs=["image",
-                            gr.Dropdown([("Google", "google"), 
+                            gr.Dropdown([("Google", "google"),
                                          ("Helsinki-NLP's opus-mt-ja-en model",
-                                          "hf")], 
+                                          "hf"),
+                                         ("Baidu", "baidu"),
+                                         ("Bing", "bing")],
                                         label="Translation Method",
                                         value="google"),
                             gr.Dropdown([("animeace_i", "fonts/animeace_i.ttf"),
