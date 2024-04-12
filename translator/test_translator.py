@@ -2,31 +2,22 @@ import pytest
 from translator import MangaTranslator
 
 
+JA_TEXT = "こんばんわ!"
+EN_TRANSLATION = "good evening!"
+
+
 @pytest.fixture
 def translator():
     return MangaTranslator()
 
 
-def test_translate_with_google(translator):
-    ja_text = "こんばんは！"
-    en_translation = "Good evening!"
-    translated_text = translator.translate(ja_text, method="google")
-    assert translated_text == en_translation
-
-
-def test_translate_with_hf(translator):
-    ja_text = "こんばんは！"
-    en_translation = "Good evening!"
-    translated_text = translator.translate(ja_text, method="hf")
-    assert translated_text == en_translation
+@pytest.mark.parametrize("method", ["google", "hf", "baidu", "bing"])
+def test_translate(translator, method):
+    translated_text = translator.translate(JA_TEXT, method=method)
+    assert translated_text.lower() == EN_TRANSLATION
 
 
 def test_invalid_translation_method(translator):
-    ja_text = "こんばんは！"
-
-    try:
-        translator.translate(ja_text, method="Mirai")
-    except ValueError as e:
-        assert str(e) == "Invalid translation method."
-    else:
-        assert False, "No exception was raised."
+    with pytest.raises(ValueError) as e:
+        translator.translate(JA_TEXT, method="Mirai")
+    assert str(e.value) == "Invalid translation method."
