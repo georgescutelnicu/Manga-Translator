@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Manga Translator</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   </head>
+   <body>
+      <header>
+      </header>
+      <div>
+         {% if uploaded_image %}
+         <img class="uploaded-image" src="data:image/png;base64,{{ uploaded_image }}" alt="Uploaded Image">
+         {% else %}
+         <p>No image uploaded.</p>
+         {% endif %}
+      </div>
+      <div class="buttons_image">
+         <a href="/" class="green" id="save-image">Save Image</a>
+         <a href="/" class="red">Go Back</a>
+      </div>
+      <footer>
+         <p>Manga Translator - Find the codebase on
+            <a class="git" href="https://github.com/georgescutelnicu/Manga-Translator">GitHub</a>
+         </p>
+      </footer>
+   </body>
+   <script>
+      // Save the image
+      document.getElementById("save-image").addEventListener("click", () => {
+          const uploadedImage = "{{ uploaded_image }}";
+          const a = document.createElement("a");
+          a.href = "data:image/png;base64," + uploadedImage;
+          a.download = "{{ name }}" + "_translated.png";
+          a.click();
+      });
+   </script>
+</html>

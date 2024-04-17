@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+      <title>Manga Translator</title>
+   </head>
+   <body>
+      <header>
+      </header>
+      <div class="container">
+         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Statistics Icon">
+         <form class="" action="/translate" method="post" enctype="multipart/form-data"
+            onsubmit="return updateHiddenInputs()">
+            <div class="select-wrapper">
+               <label for="language" class="translator-label">Language</label>
+               <div class="custom-select" id="language" tabindex="0">
+                  <div class="select-box">
+                     <span class="selected"></span>
+                     <span class="icon">&#9660;</span>
+                  </div>
+                  <div class="options">
+                     <span class="option">English</span>
+                  </div>
+               </div>
+            </div>
+            <div class="select-wrapper">
+               <label for="translator" class="translator-label">Translator</label>
+               <div class="custom-select" id="translator" tabindex="0">
+                  <div class="select-box">
+                     <span class="selected"></span>
+                     <span class="icon">&#9660;</span>
+                  </div>
+                  <div class="options">
+                     <span class="option">Google</span>
+                     <span class="option">Baidu</span>
+                     <span class="option">Bing</span>
+                     <span class="option">Opus-mt model</span>
+                  </div>
+               </div>
+            </div>
+            <div class="select-wrapper">
+               <label for="font" class="translator-label">Font</label>
+               <div class="custom-select" id="font" tabindex="0">
+                  <div class="select-box">
+                     <span class="selected"></span>
+                     <span class="icon">&#9660;</span>
+                  </div>
+                  <div class="options">
+                     <span class="option">Animeace</span>
+                     <span class="option">Mangat</span>
+                     <span class="option">Arial</span>
+                  </div>
+               </div>
+            </div>
+            <input id="file-upload" type="file" name="file" accept=".jpg, .jpeg, .png" required>
+            <label for="file-upload" class="file">
+            Upload Image
+            </label>
+            <input type="hidden" id="selected_language" name="selected_language">
+            <input type="hidden" id="selected_translator" name="selected_translator">
+            <input type="hidden" id="selected_font" name="selected_font">
+            <button type="submit">Upload</button>
+         </form>
+         <img id="loading-img" src="{{ url_for('static', filename='img/loading.gif') }}" alt="">
+         <p id="loading-p">Be patient, it might take some time!</p>
+      </div>
+      <footer>
+         <p>Manga Translator - Find the codebase on
+            <a class="git" href="https://github.com/georgescutelnicu/Manga-Translator">GitHub</a>
+         </p>
+      </footer>
+      <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+   </body>
+</html>
