@@ -9,3 +9,4 @@ ultralytics==8.1.43
 Flask==2.2.5
 Werkzeug==3.0.1
 gunicorn==21.2.0
+
