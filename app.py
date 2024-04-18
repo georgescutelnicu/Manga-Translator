@@ -12,7 +12,7 @@ import os
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "secret_key")
 
 MODEL_PATH = "model/model.pt"
 
@@ -36,7 +36,7 @@ def upload_file():
         file = request.files["file"]
         name = file.filename.split(".")[0]
 
-        if file.filename != '':
+        if file.filename != "":
 
             file_stream = file.stream
             file_bytes = np.asarray(bytearray(file_stream.read()), dtype=np.uint8)
@@ -60,13 +60,13 @@ def upload_file():
 
                 add_text(detected_image, text_translated, f"fonts/{selected_font}i.ttf", cont)
 
-            _, buffer = cv2.imencode('.png', image)
+            _, buffer = cv2.imencode(".png", image)
             image = buffer.tobytes()
-            encoded_image = base64.b64encode(image).decode('utf-8')
+            encoded_image = base64.b64encode(image).decode("utf-8")
 
             return render_template("translate.html", name=name, uploaded_image=encoded_image)
     return redirect("/")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
