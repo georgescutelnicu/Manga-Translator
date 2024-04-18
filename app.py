@@ -6,11 +6,13 @@ from add_text import add_text
 from manga_ocr import MangaOcr
 from PIL import Image
 import numpy as np
-import cv2
 import base64
+import cv2
+import os
+
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "secret"
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 MODEL_PATH = "model/model.pt"
 
@@ -36,7 +38,9 @@ def upload_file():
 
         if file.filename != '':
 
-            image = cv2.imread(file)
+            file_stream = file.stream
+            file_bytes = np.asarray(bytearray(file_stream.read()), dtype=np.uint8)
+            image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
             results = detect_bubbles(MODEL_PATH, image)
 
