@@ -1,6 +1,6 @@
 # Manga Translator
 
-Python tool for translating text found within speech bubbles in manga images. It utilizes YOLOv8 for bubble detection, MangaOCR for text extraction, and translation services like google and Helsinki-NLP's opus-mt-ja-en model for text translation.
+Python tool for translating text found within speech bubbles in manga images. It utilizes YOLOv8 for bubble detection, MangaOCR for text extraction, and translation services like google, bing, baidu and Helsinki-NLP's opus-mt-ja-en model for text translation.
 
 ## How it works
 
