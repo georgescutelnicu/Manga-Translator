@@ -24,7 +24,6 @@ def home():
 
 @app.route("/translate", methods=["POST"])
 def upload_file():
-
     if "Opus-mt model" == request.form["selected_translator"]:
         selected_translator = "hf"
     else:
@@ -36,35 +35,34 @@ def upload_file():
         file = request.files["file"]
         name = file.filename.split(".")[0]
 
-        if file.filename != "":
+        file_stream = file.stream
+        file_bytes = np.frombuffer(file_stream.read(), dtype=np.uint8)
+        image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-            file_stream = file.stream
-            file_bytes = np.asarray(bytearray(file_stream.read()), dtype=np.uint8)
-            image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+        results = detect_bubbles(MODEL_PATH, image)
 
-            results = detect_bubbles(MODEL_PATH, image)
+        manga_translator = MangaTranslator()
+        mocr = MangaOcr()
 
-            manga_translator = MangaTranslator()
-            mocr = MangaOcr()
+        for result in results:
+            x1, y1, x2, y2, score, class_id = result
 
-            for result in results:
-                x1, y1, x2, y2, score, class_id = result
+            detected_image = image[int(y1):int(y2), int(x1):int(x2)]
 
-                detected_image = image[int(y1):int(y2), int(x1):int(x2)]
+            im = Image.fromarray(np.uint8(detected_image * 255))
+            text = mocr(im)
 
-                im = Image.fromarray(np.uint8(detected_image * 255))
-                text = mocr(im)
+            detected_image, cont = process_bubble(detected_image)
+            text_translated = manga_translator.translate(text, method=selected_translator)
 
-                detected_image, cont = process_bubble(detected_image)
-                text_translated = manga_translator.translate(text, method=selected_translator)
+            add_text(detected_image, text_translated, f"fonts/{selected_font}i.ttf", cont)
 
-                add_text(detected_image, text_translated, f"fonts/{selected_font}i.ttf", cont)
+        _, buffer = cv2.imencode(".png", image)
+        image = buffer.tobytes()
+        encoded_image = base64.b64encode(image).decode("utf-8")
 
-            _, buffer = cv2.imencode(".png", image)
-            image = buffer.tobytes()
-            encoded_image = base64.b64encode(image).decode("utf-8")
+        return render_template("translate.html", name=name, uploaded_image=encoded_image)
 
-            return render_template("translate.html", name=name, uploaded_image=encoded_image)
     return redirect("/")
 
 

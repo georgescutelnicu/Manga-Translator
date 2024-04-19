@@ -39,7 +39,7 @@ if __name__ == "__main__":
         detected_image, cont = process_bubble(detected_image)
         text_translated = manga_translator.translate(text, method=args.translator)
 
-        image_with_text = add_text(detected_image, text_translated, args.font_path, cont)
+        add_text(detected_image, text_translated, args.font_path, cont)
 
     save_path = args.save_path + "/output_image.jpg"
     cv2.imwrite(save_path, image)
