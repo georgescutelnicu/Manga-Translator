@@ -1,6 +1,6 @@
 # Manga Translator
 
-Python tool for translating text found within speech bubbles in manga images. It utilizes YOLOv8 for bubble detection, MangaOCR for text extraction, and translation services like google and Helsinki-NLP's opus-mt-ja-en model for text translation.
+Python tool for translating text found within speech bubbles in manga images. It utilizes YOLOv8 for bubble detection, MangaOCR for text extraction, and translation services like google, bing, baidu and Helsinki-NLP's opus-mt-ja-en model for text translation.
 
 ## How it works
 
@@ -20,7 +20,7 @@ Python tool for translating text found within speech bubbles in manga images. It
     <img src="https://img.shields.io/badge/Dataset%202-8A2BE2"></img>
 </a>
 
-## Installation
+## Getting Started
 
 1. Clone this repository:
 
@@ -34,7 +34,7 @@ Python tool for translating text found within speech bubbles in manga images. It
     pip install -r requirements.txt
     ```
 
-## Usage
+### Command Line Interface
 
 1. Navigate to the directory where you cloned the repository:
 
@@ -55,6 +55,22 @@ Python tool for translating text found within speech bubbles in manga images. It
     - `[google/hf]`: Choose the translation service, either "google" for Google Translator or "hf" for Helsinki-NLP. (default: "google")
     - `/path/to/save`: Path to save the output image.
 
+### Flask Web App
+
+1. Navigate to the directory where you cloned the repository:
+
+    ```bash
+    cd Manga-Translator
+    ```
+
+2. Run the Flask app:
+
+    ```bash
+    python app.py
+    ```
+
+3. Open your web browser and go to `http://localhost:5000` to access the app.
+   
 ## Demo
 
 <a href="https://huggingface.co/spaces/georgescutelnicu/MangaTranslator">
