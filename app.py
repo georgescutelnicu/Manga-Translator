@@ -30,6 +30,8 @@ def upload_file():
         selected_translator = request.form["selected_translator"].lower()
 
     selected_font = request.form["selected_font"].lower()
+    if selected_font == "animeace":
+        selected_font += "_"
 
     if "file" in request.files:
         file = request.files["file"]
@@ -54,7 +56,6 @@ def upload_file():
 
             detected_image, cont = process_bubble(detected_image)
             text_translated = manga_translator.translate(text, method=selected_translator)
-
             add_text(detected_image, text_translated, f"fonts/{selected_font}i.ttf", cont)
 
         _, buffer = cv2.imencode(".png", image)
