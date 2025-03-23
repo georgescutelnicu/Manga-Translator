@@ -4,6 +4,7 @@ from translator.translator import MangaTranslator
 from add_text import add_text
 from manga_ocr import MangaOcr
 from PIL import Image
+from tqdm import tqdm
 import numpy as np
 import cv2
 import argparse
@@ -15,8 +16,8 @@ if __name__ == "__main__":
     parser.add_argument("--model-path", "-m", type=str, required=True, help="Path to model")
     parser.add_argument("--image-path", "-i", type=str, required=True, help="Path to image")
     parser.add_argument("--font-path", "-f", type=str, default="fonts/animeace_i.ttf", help="Path to font")
-    parser.add_argument("--translator", "-t", type=str, choices=["google", "hf"], default="google",
-                        help="Translator to use (google or hf)")
+    parser.add_argument("--translator", "-t", type=str, choices=["google", "hf", "baidu", "bing"], default="google",
+                        help="Translator to use (google/hf/baidu/bing)")
     parser.add_argument("--save-path", "-s", type=str, required=True, help="Path where the output image to be saved")
 
     args = parser.parse_args()
@@ -28,7 +29,7 @@ if __name__ == "__main__":
 
     image = cv2.imread(args.image_path)
 
-    for result in results:
+    for result in tqdm(results):
         x1, y1, x2, y2, score, class_id = result
 
         detected_image = image[int(y1):int(y2), int(x1):int(x2)]
