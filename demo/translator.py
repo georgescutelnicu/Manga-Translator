@@ -1,6 +1,7 @@
 from deep_translator import GoogleTranslator
 from transformers import pipeline
 import translators as ts
+import time
 
 
 class MangaTranslator:
@@ -52,6 +53,7 @@ class MangaTranslator:
         return translated_text if translated_text is not None else text
 
     def _translate_with_bing(self, text):
+        time.sleep(4)
         translated_text = ts.translate_text(text, translator="bing",
                                             from_language=self.source, 
                                             to_language=self.target)
