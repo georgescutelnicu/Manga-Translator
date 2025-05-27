@@ -45,15 +45,15 @@ Python tool for translating text found within speech bubbles in manga images. It
 2. Run the `main.py` script with the required arguments:
 
     ```bash
-    python main.py --model-path /path/to/model --image-path /path/to/image --font-path /path/to/font --translator [google/hf] --save-path /path/to/save
+    python main.py --model-path /path/to/model --image-path /path/to/image --font-path /path/to/font --translator [google/hf/bing/baidu] --save-path /path/to/save
     ```
 
     Replace the arguments as follows:
     - `/path/to/model`: Path to the YOLO model.
     - `/path/to/image`: Path to the input manga image.
     - `/path/to/font`: Path to the font file for adding text. (default: "fonts/animeace_i.ttf")
-    - `[google/hf]`: Choose the translation service, either "google" for Google Translator or "hf" for Helsinki-NLP. (default: "google")
-    - `/path/to/save`: Path to save the output image.
+    - `[google/hf/bing/baidu]`: Choose the translation service, "hf" stands for Helsinki-NLP/opus-mt-ja-en model. (default: "google")
+    - `/path/to/save`: Path to save the output image. (the image will be saved as "output_image.jpg")
 
 ### Flask Web App
 
