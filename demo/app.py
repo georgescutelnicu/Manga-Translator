@@ -43,9 +43,9 @@ def predict(img, translation_method, font):
         text_translated = manga_translator.translate(text,
                                                      method=translation_method)
 
-        image_with_text = add_text(detected_image, text_translated, font, cont)
+        image[int(y1):int(y2), int(x1):int(x2)] = add_text(detected_image, text_translated, font, cont)
 
-    return image
+    return Image.fromarray(image)
 
 demo = gr.Interface(fn=predict,
                     inputs=["image",
