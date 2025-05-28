@@ -64,6 +64,7 @@ class MangaTranslator:
 
     def _preprocess_text(self, text):
         preprocessed_text = text.replace("．", ".")
+        return preprocessed_text
 
     def _delay(self):
         time.sleep(random.randint(3, 5))
