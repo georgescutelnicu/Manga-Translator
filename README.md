@@ -10,6 +10,8 @@ Python tool for translating text found within speech bubbles in manga images. It
 - Translate extracted text to the desired language.
 - Add translated text back into the speech bubbles.
 
+⚠️ **Python Compatibility:** Works only with **Python 3.8 to 3.11 (inclusive)**.
+
 ## Dataset
 
 <a href="https://universe.roboflow.com/luciano-bastos-nunes/mangas-bubble">
