@@ -11,10 +11,15 @@ import cv2
 
 
 MODEL = "model.pt"
-EXAMPLE_LIST = [["examples/0.png"],
-                 ["examples/ex0.png"]]
+EXAMPLE_LIST = [
+    ["examples/0.png", "google", "fonts/animeace_i.ttf"],
+    ["examples/ex0.png", "google", "fonts/animeace_i.ttf"]
+]
 TITLE = "Manga Translator"
 DESCRIPTION = "Translate text in manga bubbles!"
+
+manga_translator = MangaTranslator()
+mocr = MangaOcr()
 
 
 def predict(img, translation_method, font):
@@ -25,17 +30,14 @@ def predict(img, translation_method, font):
 
     results = detect_bubbles(MODEL, img)
 
-    manga_translator = MangaTranslator()
-    mocr = MangaOcr()
-
-    image = np.array(img)
+    image = np.array(img).astype(np.uint8)
 
     for result in results:
         x1, y1, x2, y2, score, class_id = result
 
         detected_image = image[int(y1):int(y2), int(x1):int(x2)]
 
-        im = Image.fromarray(np.uint8((detected_image)*255))
+        im = Image.fromarray(detected_image)
         text = mocr(im)
 
         detected_image, cont = process_bubble(detected_image)
@@ -52,8 +54,7 @@ demo = gr.Interface(fn=predict,
                             gr.Dropdown([("Google", "google"),
                                          ("Helsinki-NLP's opus-mt-ja-en model",
                                           "hf"),
-                                         ("Sogou", "sogou"),
-                                         ("Bing", "bing")],
+                                         ("Sogou", "sogou")],
                                         label="Translation Method",
                                         value="google"),
                             gr.Dropdown([("animeace_i", "fonts/animeace_i.ttf"),

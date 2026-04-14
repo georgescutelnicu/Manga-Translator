@@ -12,8 +12,7 @@ class MangaTranslator:
         self.translators = {
             "google": self._translate_with_google,
             "hf": self._translate_with_hf,
-            "sogou": self._translate_with_sogou,
-            "bing": self._translate_with_bing
+            "sogou": self._translate_with_sogou
         }
 
     def translate(self, text, method="google"):
@@ -25,7 +24,6 @@ class MangaTranslator:
             method (str):"google" for Google Translator, 
                          "hf" for Helsinki-NLP's opus-mt-ja-en model (HF pipeline)
                          "sogou" for Sogou Translate
-                         "bing" for Microsoft Bing Translator
 
         Returns:
             str: The translated text.
@@ -52,13 +50,6 @@ class MangaTranslator:
         self._delay()
         translated_text = ts.translate_text(text, translator="sogou",
                                             from_language=self.source,
-                                            to_language=self.target)
-        return translated_text if translated_text is not None else text
-
-    def _translate_with_bing(self, text):
-        self._delay()
-        translated_text = ts.translate_text(text, translator="bing",
-                                            from_language=self.source, 
                                             to_language=self.target)
         return translated_text if translated_text is not None else text
 
