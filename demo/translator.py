@@ -1,4 +1,3 @@
-from deep_translator import GoogleTranslator
 from transformers import pipeline
 import translators as ts
 import random
@@ -37,8 +36,9 @@ class MangaTranslator:
             
     def _translate_with_google(self, text):
         self._delay()
-        translator = GoogleTranslator(source=self.source, target=self.target)
-        translated_text = translator.translate(text)
+        translated_text = ts.translate_text(text, translator="google",
+                                            from_language=self.source,
+                                            to_language=self.target)
         return translated_text if translated_text is not None else text
 
     def _translate_with_hf(self, text):

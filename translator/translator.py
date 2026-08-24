@@ -1,4 +1,3 @@
-from deep_translator import GoogleTranslator
 from transformers import pipeline
 import translators as ts
 
@@ -34,10 +33,11 @@ class MangaTranslator:
             return translator_func(self._preprocess_text(text))
         else:
             raise ValueError("Invalid translation method.")
-            
+
     def _translate_with_google(self, text):
-        translator = GoogleTranslator(source=self.source, target=self.target)
-        translated_text = translator.translate(text)
+        translated_text = ts.translate_text(text, translator="google",
+                                            from_language=self.source,
+                                            to_language=self.target)
         return translated_text if translated_text is not None else text
 
     def _translate_with_hf(self, text):
